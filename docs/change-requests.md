@@ -1,20 +1,27 @@
 ## Change Requests Description
-
-1. Conflict Detection Issue
-
+##Bugs
+1. Fix NullPointerException in Multiple Classes
 Type: Bug Fix
+Description: SonarQube detected NullPointerException risks in multiple classes including Debug.java (L47), ClassInstructorAssignmentForm.java (L172), SolverSettingsForm.java (L130), and TimeHint.java (L57) where nullable objects are used without null checks.
+Motivation: These bugs cause system crashes at runtime affecting reliability. SonarQube reported 1,600 reliability issues in the codebase.
 
-Description:
-The current university timetabling system may fail to detect scheduling conflicts in certain edge cases, such as when an instructor or a room is assigned to multiple sessions at overlapping time slots.
+2. Fix XXE Vulnerability in XML Parsing
+Type: Bug Fix
+Description: SonarQube detected that XML parsing in multiple classes like DatabaseUpdate.java, BaseImport.java, and SolverInfo.java does not disable access to external entities, making the system vulnerable to XXE attacks.
+Motivation: This is a High severity security vulnerability that can allow attackers to read internal files. SonarQube reported 120 security issues in the codebase.
 
-Motivation:
-This issue can lead to incorrect timetable generation, including double-booking of instructors or rooms, which negatively affects system correctness and real-world usability.
+3. Reduce High Cognitive Complexity in Methods
+Type: Bug Fix
+Description: SonarQube detected multiple methods with cognitive complexity exceeding the allowed limit of 15, including NaturalOrderComparator.java (L75 - complexity 27) and MultiComparable.java (L71 - complexity 16). These methods are difficult to understand and maintain.
+Motivation: High cognitive complexity makes the code hard to maintain and increases the risk of introducing bugs during future changes. SonarQube reported 51,000 maintainability issues in the codebase.
 
-This bug was identified through SonarQube static analysis 
-which detected 1,600 reliability issues in the codebase.
+4. Fix Unclosed Resources
+Type: Bug Fix
+Description: SonarQube detected multiple unclosed streams and resources such as FileOutputStream, InputStream, and BufferedReader in WikiGet.java (L76, L78) and DatabaseUpdate.java (L161) that are not properly closed using try-with-resources.
+Motivation: Unclosed resources cause memory leaks that degrade system performance over time. Identified by SonarQube Reliability analysis.
 
-
-2. Instructor Preferences
+##Features
+1. Instructor Preferences
 
 Type: New Feature
 
@@ -25,7 +32,7 @@ Motivation:
 This improves user satisfaction and increases scheduling efficiency by aligning generated timetables with instructor availability and preferences.
 
 
-3. Export Timetable
+2. Export Timetable
 
 Type: New Feature
 
@@ -36,7 +43,7 @@ Motivation:
 This enhances usability by allowing users to share, print, or store timetables outside the system.
 
 
-4. Room Capacity Validation
+3. Room Capacity Validation
 
 Type: New Feature
 
@@ -50,7 +57,7 @@ SonarQube reported missing validation checks across
 the codebase as part of its 51,000 maintainability issues.
 
 
-5. Manual Schedule Adjustment
+4. Manual Schedule Adjustment
 Type: New Feature
 
 Description:
