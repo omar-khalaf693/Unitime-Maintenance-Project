@@ -576,4 +576,7 @@ public class AccessStatsAction extends UniTimeAction<BlankForm> {
 			ret.add(new IdValue((long)slot, Constants.slot2str(slot)));
 		return ret;
 	}
+	private static double safeDivide(double a, double b) {
+		return (b == 0) ? 0.0 : a / b;
+	}
 }
